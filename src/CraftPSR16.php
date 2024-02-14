@@ -51,11 +51,11 @@ class CraftPSR16 implements CacheInterface
      * Cache::get() return false if the value is not in the cache or expired, but PSR-16 return $default(null)
      *
      * @param string $key
-     * @param null $default
-     * @return bool|mixed|null
+     * @param mixed $default
+     * @return mixed
      * @throws InvalidArgumentException
      */
-    public function get($key, $default = null)
+    public function get($key, $default = null): mixed
     {
         $key = $this->buildKey($key);
 
@@ -75,11 +75,11 @@ class CraftPSR16 implements CacheInterface
     /**
      * @param string $key
      * @param mixed $value
-     * @param null $ttl
+     * @param null|int|\DateInterval $ttl
      * @return bool
      * @throws InvalidArgumentException
      */
-    public function set($key, $value, $ttl = null)
+    public function set($key, $value, $ttl = null): bool
     {
         $key = $this->buildKey($key);
 
@@ -97,7 +97,7 @@ class CraftPSR16 implements CacheInterface
      * @param string $key
      * @return bool
      */
-    public function delete($key)
+    public function delete($key): bool
     {
         $key = $this->buildKey($key);
         return $this->has($key) ? $this->getCache()->delete($key) : true;
@@ -106,7 +106,7 @@ class CraftPSR16 implements CacheInterface
     /**
      * @return bool
      */
-    public function clear()
+    public function clear(): bool
     {
 		try {
 			TagDependency::invalidate($this->getCache(), $this->tag);
@@ -120,10 +120,10 @@ class CraftPSR16 implements CacheInterface
 
     /**
      * @param iterable $keys
-     * @param null $default
-     * @return array|iterable
+     * @param mixed $default
+     * @return iterable
      */
-    public function getMultiple($keys, $default = null)
+    public function getMultiple($keys, $default = null): iterable
     {
         if (!$keys instanceof \Traversable && !is_array($keys)) {
             throw new InvalidArgumentException(
@@ -139,10 +139,10 @@ class CraftPSR16 implements CacheInterface
 
     /**
      * @param iterable $values
-     * @param null $ttl
+     * @param null|int|\DateInterval $ttl
      * @return bool
      */
-    public function setMultiple($values, $ttl = null)
+    public function setMultiple($values, $ttl = null): bool
     {
         if (!$values instanceof \Traversable && !is_array($values)) {
             throw new InvalidArgumentException(
@@ -165,7 +165,7 @@ class CraftPSR16 implements CacheInterface
      * @param iterable $keys
      * @return bool
      */
-    public function deleteMultiple($keys)
+    public function deleteMultiple($keys): bool
     {
         if ($keys instanceof \Traversable) {
             $keys = iterator_to_array($keys, false);
@@ -187,7 +187,7 @@ class CraftPSR16 implements CacheInterface
      * @param string $key
      * @return bool
      */
-    public function has($key)
+    public function has($key): bool
     {
         $key = $this->buildKey($key);
         return $this->getCache()->exists($key);
