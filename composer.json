@@ -1,6 +1,6 @@
 {
     "name": "onstuimig/craft-psr16",
-	"version": "1.1.0",
+	"version": "1.2.0",
     "description": "Craft PSR16 Caching library",
     "type": "library",
     "license": "UNLICENSED",
@@ -13,5 +13,20 @@
 		"php": ">=7.1.0",
 		"craftcms/cms": ">=3.0.0",
 		"psr/simple-cache": ">=1.0.0"
-	}
+	},
+    "scripts": {
+        "phpstan": "phpstan --memory-limit=1G"
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "require-dev": {
+        "craftcms/phpstan": "dev-main",
+        "craftcms/rector": "dev-main"
+    },
+    "config": {
+        "allow-plugins": {
+            "yiisoft/yii2-composer": true,
+            "craftcms/plugin-installer": true
+        }
+    }
 }

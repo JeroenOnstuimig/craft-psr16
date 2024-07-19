@@ -2,8 +2,8 @@
 namespace onstuimig\craftpsr16;
 
 use Craft;
+use onstuimig\craftpsr16\exceptions\InvalidArgumentException;
 use Psr\SimpleCache\CacheInterface;
-use Psr\SimpleCache\InvalidArgumentException;
 use yii\caching\CacheInterface as YiiCacheInterface;
 use yii\caching\TagDependency;
 use yii\di\Instance;
